@@ -2,7 +2,7 @@
 include 'lib.php';
 
 $title = mysqli_real_escape_string($conn,$_POST['title']);
-$contents = mysqli_real_escape_string($conn,$_POST['contents']);
+$contents = mysqli_real_escape_string($conn,nl2br($_POST['contents']));
 $id = $_SESSION['id'];
 
 $create_query = "INSERT INTO board (title,contents,time,user_id,views) VALUES('$title','$contents',NOW(),'$id','0')";

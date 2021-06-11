@@ -11,14 +11,13 @@ $write_btn = '';
 $id = $_SESSION['id'];
 $greeting = '로그인 후 이용해주세요';
 
-
 while($data = mysqli_fetch_array($result)){
     $idx = $data['idx'];
     $title = $data['title'];
     $name = $data['user_id'];
     $time = $data['time'];
     $views = $data['views'];
-
+    
     $list = $list.'<tr>
     <th scope="row">'.$idx.'</th>
     <td><a href="detail.php?idx='.$idx.'">'.$title.'</a></td>
