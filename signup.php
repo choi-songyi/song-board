@@ -16,7 +16,7 @@ require_once 'header.php';
      alert("이메일을 입력하세요.");
      return false;
  }
- if(!document.signup_form.name.value){
+ if(!document.signup_form.user_name.value){
      alert("이름을 입력하세요.");
      return false;
  }
