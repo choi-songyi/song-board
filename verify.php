@@ -1,4 +1,4 @@
-<?php include 'lib.php';
+<!-- <?php include 'lib.php';
 require_once 'header.php';
           
 if(isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['hash']) && !empty($_GET['hash'])){
@@ -22,4 +22,4 @@ if(isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['hash']) && !
     echo '<p>Invalid approach, please use the link that has been send to your email.</p>';
 }
 
-require_once 'footer.php';?>
+require_once 'footer.php';?> -->
