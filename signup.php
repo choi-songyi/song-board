@@ -1,17 +1,7 @@
-
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Project 1</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="main.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
-</head>
-<body>
+<?php
+include 'lib.php';
+require_once 'header.php';
+?>
     <div class="login-form">
         <form action="signup_prc.php" method="POST">
             <h2 class="text-center">회원가입</h2>       
@@ -33,5 +23,7 @@
         </form>
         <p class="text-center"><a href="index.php">로그인</a></p>
     </div>
-</body>
-</html>                                		
+<?php
+require_once 'footer.php';
+?>
+                            		
