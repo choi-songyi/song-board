@@ -6,8 +6,6 @@ require_once 'header.php';
 $category = $_GET['category'];
 $search = $_GET['search'];
 
-echo $category;
-
 $search_query = "SELECT * FROM board WHERE $category like '%$search%' ORDER BY idx DESC";
 $result = mysqli_query($conn,$search_query);
 
