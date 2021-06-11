@@ -10,10 +10,22 @@ if($data = mysqli_fetch_array($result)){
     $contents = $data['contents'];
 }
 ?>
-
+<script>
+  function submitForm(){
+ if(!document.update_form.title.value){
+     alert("제목을 입력하세요.");
+     return false;
+ }
+ if(!document.update_form.contents.value){
+     alert("내용을 입력하세요.");
+     return false;
+ }
+ document.update_form.submit(); 
+}
+</script>
 <h1 class="h2">수정하기</h1>
 <div class="container">
-    <form action="update_prc.php" method="POST">
+    <form action="update_prc.php" method="POST" name="update_form">
         <div class="form-group">
             <h4>제목</h4>
             <input type="text" class="form-control" name="title" value="<?php echo $title;?>">
@@ -23,7 +35,7 @@ if($data = mysqli_fetch_array($result)){
             <textarea style="height:300px"class="form-control" name="contents"><?php echo $contents;?></textarea>
         </div>
         <input type="hidden" class="form-control" name="idx" value="<?php echo $idx;?>">
-        <button type="submit">수정하기</button>
+        <button type="submit" onclick="return submitForm()">수정하기</button>
     </form>
     <a href="index.php">돌아가기</a>
 </div>
