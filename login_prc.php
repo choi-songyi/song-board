@@ -5,7 +5,7 @@ include 'lib.php';
 $id = mysqli_real_escape_string($conn,$_POST['user_id']);
 $password = mysqli_real_escape_string($conn,$_POST['password']);
 
-$login_query = "SELECT * FROM member WHERE user_id='$id' AND password=password($password)";
+$login_query = "SELECT * FROM member WHERE user_id='$id' AND password='password($password)'";
 $result = mysqli_query($conn,$login_query);
 $data = mysqli_fetch_array($result);
 
