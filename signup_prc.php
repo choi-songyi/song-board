@@ -23,14 +23,17 @@ if($result){
                 ------------------------
                 Please click this link to activate your account:
                 https://project-songyi.herokuapp.com/verify.php?email='.$email.'&hash='.$hash.'';                  
-    $headers = 'From:noreply@project-songyi.herokuapp.com' . "\r\n"; 
-    mail($to, $subject, $message, $headers); 
+    $headers = 'From:noreply@project-songyi.herokuapp.com\r\n'; 
+    $check = mail($to, $subject, $message, $headers); 
+    if($check){
+        echo "mail success";
+        }else  {
+        echo "mail fail";
+       }
     echo '<p class="text-center">회원가입을 축하합니다! 이메일 인증을 완료해주세요 <a href=login.php>로그인 하기</a></p>';
-    require_once 'footer.php';
 } else{
     require_once 'header.php';
     echo '<p class="text-center"><a href=signup.php>중복된 아이디 또는 이메일 입니다</a></p>';
-    require_once 'footer.php';
     // echo mysqli_error($conn);
 }
 ?>
