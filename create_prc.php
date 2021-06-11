@@ -5,7 +5,7 @@ $title = mysqli_real_escape_string($conn,$_POST['title']);
 $contents = mysqli_real_escape_string($conn,$_POST['contents']);
 $id = $_SESSION['id'];
 
-$create_query = "INSERT INTO board (title,contents,time,user_id) VALUES('$title','$contents',NOW(),'$id')";
+$create_query = "INSERT INTO board (title,contents,time,user_id,views) VALUES('$title','$contents',NOW(),'$id','0')";
 $result = mysqli_query($conn,$create_query);
 
 if($result){

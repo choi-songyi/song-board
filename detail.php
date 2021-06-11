@@ -13,13 +13,18 @@ $update_btn = '';
 $detail_query = "SELECT * FROM board WHERE idx=$idx";
 $result = mysqli_query($conn,$detail_query);
 $data = mysqli_fetch_array($result);
+$views = $data['views'];
 
 if(isset($_GET['idx'])){
     $title = $data['title'];
     $time = $data['time'];
     $contents = $data['contents'];
     $name = $data['user_id'];
- 
+    
+    $views = $views+1;
+    $view_query = "UPDATE board SET views=$views WHERE idx=$idx";
+    $view_result = mysqli_query($conn,$view_query);
+
     if($name === $_SESSION['id']){
         $delete_btn = $delete_btn.'<form action="delete_prc.php" method="POST">
         <input type="hidden" name="idx" value="'.$_GET['idx'].'">

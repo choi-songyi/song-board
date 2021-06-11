@@ -17,13 +17,14 @@ while($data = mysqli_fetch_array($result)){
     $title = $data['title'];
     $name = $data['user_id'];
     $time = $data['time'];
-    
+    $views = $data['views'];
+
     $list = $list.'<tr>
     <th scope="row">'.$idx.'</th>
     <td><a href="detail.php?idx='.$idx.'">'.$title.'</a></td>
     <td>'.$name.'</td>
     <td>'.$time.'</td>
-    <td>@mdo</td>
+    <td>'.$views.'</td>
     <td>@mdo</td>
     </tr>';
 }
