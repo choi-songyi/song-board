@@ -28,6 +28,6 @@ require_once 'header.php';
         <input type="hidden" class="form-control" name="user_id" value="<?php echo $_SESSION['id'];?>">
         <button type="submit" onclick="return submitForm()">작성하기</button>
     </form>
-    <a href="board.php">돌아가기</a>
+    <a href="index.php">돌아가기</a>
 </div>
 <?php require_once 'footer.php';?>
