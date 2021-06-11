@@ -1,16 +1,20 @@
-<?php include 'lib.php';
+<?php 
+
+include 'lib.php';
 require_once 'header.php';
 
-$board_query = "SELECT * FROM board ORDER BY idx DESC";
-$result = mysqli_query($conn,$board_query);
+$category = $_GET['category'];
+$search = $_GET['search'];
+
+echo $category;
+
+$search_query = "SELECT * FROM board WHERE $category like '%$search%' ORDER BY idx DESC";
+$result = mysqli_query($conn,$search_query);
 
 $list = '';
 $logout_btn = '';
 $login_btn = '';
 $write_btn = '';
-$id = $_SESSION['id'];
-$greeting = '로그인 후 이용해주세요';
-
 
 while($data = mysqli_fetch_array($result)){
     $idx = $data['idx'];
@@ -29,7 +33,6 @@ while($data = mysqli_fetch_array($result)){
 }
 
 if($_SESSION['isLogin']==='true'){
-    $greeting = $id.'님 안녕하세요';
     $logout_btn = '<form action="logout_prc.php" method="POST">
     <button type="submit" class="custom">로그아웃</button>
 </form>' ;
@@ -37,16 +40,14 @@ if($_SESSION['isLogin']==='true'){
     <button type="submit" class="custom">글쓰기</button>
 </form>';
 } else if($isLogin = 'false'){
-    $greeting = '로그인 후 이용해주세요';
     $login_btn = '<form action="login.php" method="POST">
     <button type="submit" class="custom">로그인</button>
 </form>';
 }
 ?>
 
-<h3><?php echo $greeting;?></h3>
 <div class="container">
-    <h1 class="h2">자유게시판</h1>
+    <h1 class="h2">'<?php echo $search;?>' 검색결과</h1>
     <?php echo $write_btn;?>
     <br>
     <table class="table">
@@ -66,6 +67,9 @@ if($_SESSION['isLogin']==='true'){
     </table>
     <?php echo $logout_btn;?>
     <?php echo $login_btn;?>
+    <form action="index.php" method="POST">
+    <button type="submit" class="custom">돌아가기</button>
+</form>
 </div>
 <div class="search_box">
     <form action="search.php" method="get">
@@ -77,6 +81,5 @@ if($_SESSION['isLogin']==='true'){
       <input type="text" name="search" size="40"/> 
       <button type="submit">검색</button>
     </form>
-    </div>
+</div>
 <?php require_once 'footer.php';?>
-

@@ -51,7 +51,7 @@ if(isset($_GET['idx'])){
     }
 </script>
 
-<h1>자유게시판</h1>
+<h3>자유게시판</h3>
 <div class="container">
     <h3><?=$title?></h3><br>
     <?=$name?> | <?=$time?>

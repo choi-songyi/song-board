@@ -16,7 +16,7 @@ require_once 'header.php';
         </div>
         <div class="clearfix">
             <label class="pull-left checkbox-inline"><input type="checkbox">아이디 저장</label>
-            <a href="#" class="pull-right">비밀번호 분실</a>
+            <a href="" class="pull-right">비밀번호 분실</a>
         </div>        
     </form>
     <p class="text-center"><a href="signup.php">회원가입</a></p>
