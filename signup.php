@@ -21,7 +21,7 @@ require_once 'header.php';
                 <button type="submit" class="btn btn-primary btn-block">회원가입</button>
             </div>
         </form>
-        <p class="text-center"><a href="index.php">로그인</a></p>
+        <p class="text-center"><a href="login.php">로그인</a></p>
     </div>
 <?php
 require_once 'footer.php';
