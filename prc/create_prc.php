@@ -1,5 +1,5 @@
 <?php
-include 'lib.php';
+include '../lib/lib.php';
 
 $title = mysqli_real_escape_string($conn,$_POST['title']);
 $contents = mysqli_real_escape_string($conn,nl2br($_POST['contents']));
@@ -9,11 +9,11 @@ $create_query = "INSERT INTO board (title,contents,time,user_id,views) VALUES('$
 $result = mysqli_query($conn,$create_query);
 
 if($result){
-    header('location:index.php');
+    header('location:../index.php');
 } else{
-    require_once 'header.php';
+    require_once '../lib/header.php';
     echo '<p class="text-center">저장하는 과정에서 문제가 발생했습니다. <br><a href=create.php>다시 작성해주세요</a></p>';
-    require_once 'footer.php';
+    require_once '../lib/footer.php';
 }
 
 ?>

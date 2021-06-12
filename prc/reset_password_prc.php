@@ -1,6 +1,6 @@
 <?php
-include 'lib.php';
-require_once 'header.php';
+include '../lib/lib.php';
+require_once '../lib/header.php';
 
 $id = mysqli_real_escape_string($conn,$_POST['user_id']);
 $email = mysqli_real_escape_string($conn,$_POST['email']);
@@ -22,13 +22,13 @@ if($data){
             <button type="submit" class="btn btn-primary btn-block">변경하기</button>
         </div>
     </form>
-    <p class="text-center"><a href="login.php">로그인</a></p>
+    <p class="text-center"><a href="../member/login.php">로그인</a></p>
 </div>';
 
 } else{
     echo '해당하는 아이디 또는 이메일이 없습니다. 
-    <a href="reset_password.php">아이디 또는 이메일을 확인해주세요<a>';
+    <a href="../member/reset_password.php">아이디 또는 이메일을 확인해주세요<a>';
 };
 
-require_once 'footer.php';
+require_once '../lib/footer.php';
 ?>

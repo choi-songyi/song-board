@@ -1,7 +1,7 @@
 <?php 
 
-include 'lib.php';
-require_once 'header.php';
+include '../lib/lib.php';
+require_once '../lib/header.php';
 
 $category = $_GET['category'];
 $search = $_GET['search'];
@@ -22,7 +22,7 @@ while($data = mysqli_fetch_array($result)){
     
     $list = $list.'<tr>
     <th scope="row">'.$idx.'</th>
-    <td><a href="detail.php?idx='.$idx.'">'.$title.'</a></td>
+    <td><a href="../board/detail.php?idx='.$idx.'">'.$title.'</a></td>
     <td>'.$name.'</td>
     <td>'.$time.'</td>
     <td>@mdo</td>
@@ -31,14 +31,14 @@ while($data = mysqli_fetch_array($result)){
 }
 
 if($_SESSION['isLogin']==='true'){
-    $logout_btn = '<form action="logout_prc.php" method="POST">
+    $logout_btn = '<form action="../prc/logout_prc.php" method="POST">
     <button type="submit" class="custom">로그아웃</button>
 </form>' ;
     $write_btn = '<form action="create.php" method="POST">
     <button type="submit" class="custom">글쓰기</button>
 </form>';
 } else if($isLogin = 'false'){
-    $login_btn = '<form action="login.php" method="POST">
+    $login_btn = '<form action="../member/login.php" method="POST">
     <button type="submit" class="custom">로그인</button>
 </form>';
 }
@@ -65,7 +65,7 @@ if($_SESSION['isLogin']==='true'){
     </table>
     <?php echo $logout_btn;?>
     <?php echo $login_btn;?>
-    <form action="index.php" method="POST">
+    <form action="../index.php" method="POST">
     <button type="submit" class="custom">돌아가기</button>
 </form>
 </div>
@@ -80,4 +80,4 @@ if($_SESSION['isLogin']==='true'){
       <button type="submit">검색</button>
     </form>
 </div>
-<?php require_once 'footer.php';?>
+<?php require_once '../lib/footer.php';?>

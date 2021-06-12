@@ -1,6 +1,6 @@
 <?php
-include 'lib.php';
-require_once 'header.php';
+include '../lib/lib.php';
+require_once '../lib/header.php';
 ?>
 <script>
   function submitForm(){
@@ -24,7 +24,7 @@ require_once 'header.php';
 }
 </script>
 <div class="login-form">
-    <form action="signup_prc.php" method="POST" name="signup_form">
+    <form action="../prc/signup_prc.php" method="POST" name="signup_form">
         <h2 class="text-center">회원가입</h2>       
         <div class="form-group">
             <input type="text" name="user_id" class="form-control" placeholder="아이디">
@@ -45,6 +45,6 @@ require_once 'header.php';
     <p class="text-center"><a href="login.php">로그인</a></p>
 </div>
 <?php
-require_once 'footer.php';
+require_once '../lib/footer.php';
 ?>
                             		

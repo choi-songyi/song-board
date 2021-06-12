@@ -1,5 +1,5 @@
 <?php
-include 'lib.php';
+include '../lib/lib.php';
 
 $id = mysqli_real_escape_string($conn,$_POST['user_id']);
 $password = mysqli_real_escape_string($conn,$_POST['password']);
@@ -8,7 +8,7 @@ $name = mysqli_real_escape_string($conn,$_POST['user_name']);
 // $hash = mysqli_real_escape_string($conn,md5(rand(0,1000)));
 // $temp_password = mysqli_real_escape_string($conn,rand(1000,5000));
 
-$signup_query = "INSERT INTO member (user_id,password,email,user_name) VALUES('$id','password($password)','$email','$name')";
+$signup_query = "INSERT INTO member (user_id,password,email,user_name) VALUES('$id',password('$password'),'$email','$name')";
 $result = mysqli_query($conn,$signup_query);
 
 if($result){
@@ -29,9 +29,9 @@ if($result){
     //     }else  {
     //     echo "mail fail";
     //    }
-    echo '<p class="text-center">회원가입을 축하합니다! <a href=login.php>로그인 하기</a></p>';
+    echo '<p class="text-center">회원가입을 축하합니다! <a href=../member/login.php>로그인 하기</a></p>';
 } else{
-    echo '<p class="text-center"><a href=signup.php>중복된 아이디 또는 이메일 입니다</a></p>';
+    echo '<p class="text-center"><a href=../member/signup.php>중복된 아이디 또는 이메일 입니다</a></p>';
     // echo mysqli_error($conn);
 }
 ?>

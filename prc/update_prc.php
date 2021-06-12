@@ -1,5 +1,5 @@
-<?php include 'lib.php';
-require_once 'header.php';
+<?php include '../lib/lib.php';
+require_once '../lib/header.php';
 
 
 $idx =$_POST['idx'];
@@ -10,10 +10,10 @@ $update_query = "UPDATE board SET title = '$title', contents = '$contents' WHERE
 $result = mysqli_query($conn,$update_query);
 
 if($result){
-    header('location:detail.php?idx='.$idx);
+    header('location:../board/detail.php?idx='.$idx);
 } else{
     echo mysqli_error($conn);
 }
 ?>
 
-<?php require_once 'footer.php';?>
+<?php require_once '../lib/footer.php';?>

@@ -1,5 +1,5 @@
-<?php include 'lib.php';
-require_once 'header.php';
+
+<?php include './lib/lib.php';
 
 $board_query = "SELECT * FROM board ORDER BY idx DESC";
 $result = mysqli_query($conn,$board_query);
@@ -8,7 +8,6 @@ $list = '';
 $logout_btn = '';
 $login_btn = '';
 $write_btn = '';
-$id = $_SESSION['id'];
 $greeting = '로그인 후 이용해주세요';
 
 while($data = mysqli_fetch_array($result)){
@@ -20,7 +19,7 @@ while($data = mysqli_fetch_array($result)){
     
     $list = $list.'<tr>
     <th scope="row">'.$idx.'</th>
-    <td><a href="detail.php?idx='.$idx.'">'.$title.'</a></td>
+    <td><a href="./board/detail.php?idx='.$idx.'">'.$title.'</a></td>
     <td>'.$name.'</td>
     <td>'.$time.'</td>
     <td>'.$views.'</td>
@@ -29,21 +28,35 @@ while($data = mysqli_fetch_array($result)){
 }
 
 if($_SESSION['isLogin']==='true'){
+    $id = $_SESSION['id'];
     $greeting = $id.'님 안녕하세요';
-    $logout_btn = '<form action="logout_prc.php" method="POST">
+    $logout_btn = '<form action="./prc/logout_prc.php" method="POST">
     <button type="submit" class="custom">로그아웃</button>
 </form>' ;
-    $write_btn = '<form action="create.php" method="POST">
+    $write_btn = '<form action="./board/create.php" method="POST">
     <button type="submit" class="custom">글쓰기</button>
 </form>';
 } else if($isLogin = 'false'){
     $greeting = '로그인 후 이용해주세요';
-    $login_btn = '<form action="login.php" method="POST">
+    $login_btn = '<form action="./member/login.php" method="POST">
     <button type="submit" class="custom">로그인</button>
 </form>';
 }
 ?>
 
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project 1</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="main.css" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+</head>
+<body>
 <h3><?php echo $greeting;?></h3>
 <div class="container">
     <h1 class="h2">자유게시판</h1>
@@ -68,7 +81,7 @@ if($_SESSION['isLogin']==='true'){
     <?php echo $login_btn;?>
 </div>
 <div class="search_box">
-    <form action="search.php" method="get">
+    <form action="./board/search.php" method="get">
       <select name="category">
         <option value="title">제목</option>
         <option value="user_id">작성자</option>
@@ -78,5 +91,5 @@ if($_SESSION['isLogin']==='true'){
       <button type="submit">검색</button>
     </form>
     </div>
-<?php require_once 'footer.php';?>
+<?php require_once './lib/footer.php';?>
 
