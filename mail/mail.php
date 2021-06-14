@@ -75,7 +75,7 @@ $mail->Subject = '회원가입 인증 메일입니다.';
 //convert HTML into a basic plain-text alternative body
 $mail->msgHTML('<p>회원가입을 환영합니다!<br></p>
 <p>아래 링크를 클릭해주세요<br></p>
-<a href="https://project-songyi.herokuapp.com/member/signup_prc.php?id='.$id.'">https://project-songyi.herokuapp.com/member/signup_prc.php?id='.$id.'</a>');
+<a href="https://project-songyi.herokuapp.com/prc/signup_prc.php?id='.$id.'">https://project-songyi.herokuapp.com/prc/signup_prc.php?id='.$id.'</a>');
 
 //Replace the plain text body with one created manually
 $mail->AltBody = '회원가입 인증 메일입니다';
