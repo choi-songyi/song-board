@@ -7,7 +7,7 @@ if(!isset($id)){
     echo '잘못된 접근입니다';
 }
 
-$signup_query = "UPDATE member SET active = '1' WHERE id = '$id'";
+$signup_query = "UPDATE member SET active = '1' WHERE user_id = '$id'";
 $result = mysqli_query($conn,$signup_query);
 
 if($result){
