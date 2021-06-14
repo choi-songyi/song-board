@@ -3,7 +3,7 @@ include '../lib/lib.php';
 
 $prevPage = $_SERVER['HTTP_REFERER'];
 
-$comment = mysqli_real_escape_string($conn,$_REQUEST['comment']);
+$comment = mysqli_real_escape_string($conn,nl2br($_REQUEST['comment']));
 $idx = $_REQUEST['idx'];
 $content_number = $_REQUEST['content_number'];
 
