@@ -33,14 +33,21 @@ if(isset($_GET['idx'])){
 
     while($comment_data = mysqli_fetch_array($comment_result)){
         $comment_id = $comment_data['user_id'];
+        $update_comment = '';
+        $delete_comment = '';
         if($comment_id === $_SESSION['id']){
             $delete_comment = '<form action="../prc/delete_comment_prc.php" method="POST">
             <input type="hidden" name="content_number" value="'.$idx.'">
             <input type="hidden" name="idx" value="'.$comment_data['idx'].'">
             <button type="submit" class="" onclick="return submitForm()">삭제하기</button>
-            </form><button type="" class="" onclick="update_comment()">수정하기</button>';
-            $update_comment = '';
-        }
+            </form>';
+            $update_comment = '<form action="../prc/update_comment_prc.php" name="update_comment_form" method="PUT">
+            <input type="hidden" id="comment'.$comment_data['idx'].'" name="comment" value="">
+            <input type="hidden" name="idx" value="'.$comment_data['idx'].'">
+            <input type="hidden" name="content_number" value="'.$idx.'">
+            <button type="submit" class="" onclick="return updateComment('.$comment_data['idx'].')">수정하기</button>
+            </form>';
+        };
         $comment_id = $comment_data['user_id'];
         $comment = $comment_data['comment'];
         $comment_time = $comment_data['time'];
@@ -48,7 +55,7 @@ if(isset($_GET['idx'])){
         <p>'.$comment_id.'</p>
         <p>'.$comment.'</p>
         <p>'.$comment_time.'</p>
-        <span>'.$update_comment.$delete_comment.'</span></div>';
+        '.$update_comment.$delete_comment.'</div>';
         };
 
     if($_SESSION['isLogin']=='true'){
@@ -105,9 +112,16 @@ function submitComment(){
  } 
  document.comment_form.submit(); 
 };
-function update_comment(){
-   alert('업데이트 구현 해야함');
-}
+
+function updateComment(a){
+    var comment = prompt('댓글을 입력하세요');
+    if(!comment){
+        return false;
+    }else{
+    // document.update_comment_form.comment.value = comment;
+    document.getElementById(`comment${a}`).value = comment;
+    };
+};
 </script>
 
 <h3>자유게시판</h3>
