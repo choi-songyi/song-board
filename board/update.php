@@ -25,7 +25,7 @@ if($data = mysqli_fetch_array($result)){
 </script>
 <h1 class="h2">수정하기</h1>
 <div class="container">
-    <form action="../prc/update_prc.php" method="POST" name="update_form">
+    <form action="../prc/update_prc.php" method="PUT" name="update_form">
         <div class="form-group">
             <h4>제목</h4>
             <input type="text" class="form-control" name="title" value="<?php echo $title;?>">
