@@ -10,6 +10,7 @@ $login_btn = '';
 $write_btn = '';
 $greeting = '로그인 후 이용해주세요';
 
+$i = 1;
 while($data = mysqli_fetch_array($result)){
     $idx = $data['idx'];
     $title = $data['title'];
@@ -25,15 +26,16 @@ while($data = mysqli_fetch_array($result)){
         $comment = 0;
     }
 
-    
     $list = $list.'<tr>
-    <th scope="row">'.$idx.'</th>
+    <th scope="row">'.$i.'</th>
     <td><a href="./board/detail.php?idx='.$idx.'">'.$title.'</a></td>
     <td>'.$name.'</td>
     <td>'.$time.'</td>
     <td>'.$views.'</td>
     <td>'.$comment.'</td>
     </tr>';
+
+    $i = $i+1;
 }
 
 if($_SESSION['isLogin']==='true'){
