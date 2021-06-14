@@ -16,6 +16,15 @@ while($data = mysqli_fetch_array($result)){
     $name = $data['user_id'];
     $time = $data['time'];
     $views = $data['views'];
+
+    $comment_query = "SELECT * FROM comments WHERE content_number = $idx";
+    $comment_result = mysqli_query($conn,$comment_query);
+    if($comment_data = mysqli_num_rows($comment_result)){
+        $comment =$comment_data;
+    } else{ 
+        $comment = 0;
+    }
+
     
     $list = $list.'<tr>
     <th scope="row">'.$idx.'</th>
@@ -23,7 +32,7 @@ while($data = mysqli_fetch_array($result)){
     <td>'.$name.'</td>
     <td>'.$time.'</td>
     <td>'.$views.'</td>
-    <td>@mdo</td>
+    <td>'.$comment.'</td>
     </tr>';
 }
 
