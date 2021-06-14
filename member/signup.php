@@ -24,7 +24,7 @@ require_once '../lib/header.php';
 }
 </script>
 <div class="login-form">
-    <form action="../prc/signup_prc.php" method="POST" name="signup_form">
+    <form action="../mail/mail.php" method="POST" name="signup_form">
         <h2 class="text-center">회원가입</h2>       
         <div class="form-group">
             <input type="text" name="user_id" class="form-control" placeholder="아이디">

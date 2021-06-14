@@ -11,10 +11,13 @@ $data = mysqli_fetch_array($result);
 
 
 if(isset($data)){
-    $_SESSION['isLogin'] = 'true';
-    $_SESSION['id'] = $id;
-    header('location:../prc/check_login.php');
-
+    if($data['active']=='0'){
+        echo '이메일 인증을 완료해주세요';
+    } else if($data['active']=='1'){
+        $_SESSION['isLogin'] = 'true';
+        $_SESSION['id'] = $id;
+        header('location:../prc/check_login.php');
+    } ;  
 } else{
     require_once '../lib/header.php';
     echo '<p class="text-center">아이디 또는 비밀번호가 틀렸습니다<br><a href=../member/login.php>다시 로그인해주세요</a></p>';
