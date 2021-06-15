@@ -18,6 +18,22 @@ if($result){
     // echo mysqli_error($conn);
 }
 
+// # Include the Autoloader (see "Libraries" for install instructions)
+// require 'vendor/autoload.php';
+// use Mailgun\Mailgun;
+// # Instantiate the client.
+// $mgClient = new Mailgun('8ec06383d9378631e7579fe1bec4b4f1-24e2ac64-0a8443dd');
+// $domain = "sandbox8c489490264b4f948c685976655c191f.mailgun.org";
+// # Make the call to the client.
+// $result = $mgClient->sendMessage($domain, array(
+// 	'from'	=> 'Excited User <mailgun@sandbox8c489490264b4f948c685976655c191f.mailgun.org>',
+// 	'to'	=> 'Baz <YOU@sandbox8c489490264b4f948c685976655c191f.mailgun.org>',
+// 	'subject' => 'Hello',
+// 	'text'	=> 'Testing some Mailgun awesomness!'
+// ));
+
+
+
 //Import PHPMailer classes into the global namespace
 
 
@@ -38,12 +54,14 @@ $mail->SMTPDebug = SMTP::DEBUG_SERVER;
 
 //Set the hostname of the mail server
 $mail->Host = 'smtp.naver.com';
+
 //Use `$mail->Host = gethostbyname('smtp.gmail.com');`
 //if your network does not support SMTP over IPv6,
 //though this may cause issues with TLS
 
 //Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
 $mail->Port = 465;
+
 
 //Set the encryption mechanism to use - STARTTLS or SMTPS
 $mail->SMTPSecure = 'ssl';
@@ -55,7 +73,7 @@ $mail->SMTPAuth = true;
 $mail->Username = 'thddlwlsdl';
 
 //Password to use for SMTP authentication
-$mail->Password = '22TQLKQDC8XU';
+$mail->Password = '6CYTSGC3Z52W';
 
 $mail->CharSet = 'UTF-8';
 
@@ -113,3 +131,5 @@ function save_mail($mail)
 
     return $result;
 }
+
+
