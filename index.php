@@ -41,6 +41,27 @@ while($data = mysqli_fetch_array($result)){
 if($_SESSION['isLogin']==='true'){
     $id = $_SESSION['id'];
     $greeting = $id.'님 안녕하세요';
+    $level_msg = '';
+    $count_post_query = "SELECT * FROM board WHERE user_id='$id'";
+    $count_post_result = mysqli_query($conn,$count_post_query);
+    $count_post = mysqli_num_rows($count_post_result);
+    $count_comments_query = "SELECT * FROM comments WHERE user_id='$id'";
+    $count_comments_result = mysqli_query($conn,$count_comments_query);
+    $count_comments = mysqli_num_rows($count_comments_result);
+    $count = $count_post+($count_comments/2);
+    if($count<=1){
+        $level = 1;
+        $level_msg = '회원님의 등급은 '.$level.'입니다';
+    } else if($count<=4){
+        $level = 2;
+        $level_msg = '회원님의 등급은 '.$level.'입니다';
+    } else if(5<=$count){
+        $level = 3;
+        $level_msg = '회원님의 등급은 '.$level.'입니다';
+    };
+    $level_query = "UPDATE member SET level = $level WHERE user_id = '$id'";
+    mysqli_query($conn,$level_query);
+
     $logout_btn = '<form action="./prc/logout_prc.php" method="POST">
     <button type="submit" class="custom">로그아웃</button>
 </form>' ;
@@ -69,6 +90,8 @@ if($_SESSION['isLogin']==='true'){
 </head>
 <body>
 <h3><?php echo $greeting;?></h3>
+<h4><?php echo $level_msg ?></h4>
+<a href="./member/level.html">회원 등급 기준 보러가기</a>
 <div class="container">
     <h1 class="h2">자유게시판</h1>
     <?php echo $write_btn;?>
