@@ -16,6 +16,23 @@ if(isset($data)){
     } else if($data['active']=='1'){
         $_SESSION['isLogin'] = 'true';
         $_SESSION['id'] = $id;
+        
+        $count_post_query = "SELECT * FROM board WHERE user_id='$id'";
+        $count_post_result = mysqli_query($conn,$count_post_query);
+        $count_post = mysqli_num_rows($count_post_result);
+        $count_comments_query = "SELECT * FROM comments WHERE user_id='$id'";
+        $count_comments_result = mysqli_query($conn,$count_comments_query);
+        $count_comments = mysqli_num_rows($count_comments_result);
+        $count = $count_post+($count_comments/2);
+        if($count<=1){
+            $level = 1;
+        } else if($count<=4){
+            $level = 2;
+        } else if(5<=$count){
+            $level = 3;
+        };
+        $level_query = "UPDATE member SET level = $level WHERE user_id = '$id'";
+        mysqli_query($conn,$level_query);
         header('location:../prc/check_login.php');
     } ;  
 } else{
