@@ -1,5 +1,11 @@
 <?php include '../lib/lib.php';
 require_once '../lib/header.php';
+
+if(isset($_GET['parent'])){
+    $parent = $_GET['parent'];
+} else{
+    $parent = 0;
+}
 ?>
 <script>
   function submitForm(){
@@ -26,6 +32,7 @@ require_once '../lib/header.php';
             <textarea style="height:300px"class="form-control" name="contents"  placeholder="내용을 입력해주세요"></textarea>
         </div>
         <input type="hidden" class="form-control" name="user_id" value="<?php echo $_SESSION['id'];?>">
+        <input type="hidden" class="form-control" name="parent" value="<?php echo $parent;?>">
         <button type="submit" onclick="return submitForm()">작성하기</button>
     </form>
     <a href="../index.php">돌아가기</a>

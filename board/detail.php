@@ -12,13 +12,14 @@ $update_btn = '';
 $login = '';
 $comment_container = '';
 $delete_comment = '';
+$reply_post = '';
 
 $detail_query = "SELECT * FROM board WHERE idx=$idx";
 $result = mysqli_query($conn,$detail_query);
 $data = mysqli_fetch_array($result);
 $views = $data['views'];
 
-$comment_query = "SELECT * FROM comments WHERE content_number=$idx";
+$comment_query = "SELECT * FROM comments WHERE content_number=$idx ORDER BY idx DESC";
 $comment_result = mysqli_query($conn,$comment_query);
 
 if(isset($_GET['idx'])){
@@ -67,6 +68,8 @@ if(isset($_GET['idx'])){
         <input type="hidden" class="form-control" name="content_number" value="'.$idx.'">
         <button type="submit" onclick="return submitComment()">댓글달기</button>
         </form>';
+        $reply_post = '<form action="create.php" method="GET">
+                <button type="submit" name="parent" value="'.$idx.'">답글달기</button></form>';
     } else {
         $comment_btn ='<form action="" method="POST" name="comment_form">
         <div class="form-group">
@@ -132,6 +135,7 @@ function updateComment(a){
 <div class="container2">
     <p><?=$contents?></p> 
 </div>
+<?=$reply_post?>
 <?=$comment_container?>
 <div class="container">
     <?=$comment_btn?>

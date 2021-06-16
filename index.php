@@ -1,7 +1,7 @@
 
 <?php include './lib/lib.php';
 
-$board_query = "SELECT * FROM board ORDER BY idx DESC";
+$board_query = "SELECT * FROM board ORDER BY group_num DESC, group_order ASC";
 $result = mysqli_query($conn,$board_query);
 
 $list = '';
@@ -18,6 +18,7 @@ while($data = mysqli_fetch_array($result)){
     $time = $data['time'];
     $views = $data['views'];
 
+
     $comment_query = "SELECT * FROM comments WHERE content_number = $idx";
     $comment_result = mysqli_query($conn,$comment_query);
     if($comment_data = mysqli_num_rows($comment_result)){
@@ -27,8 +28,8 @@ while($data = mysqli_fetch_array($result)){
     }
 
     $list = $list.'<tr>
-    <th scope="row">'.$i.'</th>
-    <td><a href="./board/detail.php?idx='.$idx.'">'.$title.'</a></td>
+    <th style="width:10px">'.$i.'</th>
+    <td><a href="./board/detail.php?idx='.$idx.'">'.$title.'</a></br></td>
     <td>'.$name.'</td>
     <td>'.$time.'</td>
     <td>'.$views.'</td>
@@ -79,6 +80,8 @@ if($_SESSION['isLogin']==='true'){
 <div class="container">
     <h1 class="h2">자유게시판</h1>
     <?php echo $write_btn;?>
+    <?php echo $logout_btn;?>
+    <?php echo $login_btn;?>
     <br>
     <table class="table">
     <thead>
@@ -95,8 +98,6 @@ if($_SESSION['isLogin']==='true'){
        <?= $list;?>
     </tbody>
     </table>
-    <?php echo $logout_btn;?>
-    <?php echo $login_btn;?>
 </div>
 <div class="search_box">
     <form action="./board/search.php" method="get">
