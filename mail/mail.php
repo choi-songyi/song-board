@@ -8,7 +8,7 @@ $password = mysqli_real_escape_string($conn,$_POST['password']);
 $email = mysqli_real_escape_string($conn,$_POST['email']);
 $name = mysqli_real_escape_string($conn,$_POST['user_name']);
 
-$signup_query = "INSERT INTO member (user_id,password,email,user_name,active,level) VALUES('$id',password('$password'),'$email','$name','0','0')";
+$signup_query = "INSERT INTO member (user_id,password,email,user_name,active,level) VALUES('$id',password('$password'),'$email','$name','1','0')";
 $result = mysqli_query($conn,$signup_query);
 
 if($result){
