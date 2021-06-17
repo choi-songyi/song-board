@@ -12,7 +12,7 @@ $signup_query = "INSERT INTO member (user_id,password,email,user_name,active,lev
 $result = mysqli_query($conn,$signup_query);
 
 if($result){
-   echo '인증 메일이 발송 되었습니다. 이메일 인증을 완료해주세요';
+   echo '<p class="text-center">회원가입을 축하합니다! <a href=../member/login.php>로그인 하기</a></p>';
 } else{
     echo '<p class="text-center"><a href=../member/signup.php>중복된 아이디 또는 이메일 입니다</a></p>';
     // echo mysqli_error($conn);
