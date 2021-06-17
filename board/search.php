@@ -13,7 +13,7 @@ $list = '';
 $logout_btn = '';
 $login_btn = '';
 $write_btn = '';
-
+$i = 1;
 while($data = mysqli_fetch_array($result)){
     $idx = $data['idx'];
     $title = $data['title'];
@@ -21,13 +21,15 @@ while($data = mysqli_fetch_array($result)){
     $time = $data['time'];
     
     $list = $list.'<tr>
-    <th scope="row">'.$idx.'</th>
+    <th scope="row">'.$i.'</th>
     <td><a href="../board/detail.php?idx='.$idx.'">'.$title.'</a></td>
     <td>'.$name.'</td>
     <td>'.$time.'</td>
     <td>@mdo</td>
     <td>@mdo</td>
     </tr>';
+
+    $i = $i++;
 }
 
 if($_SESSION['isLogin']==='true'){
