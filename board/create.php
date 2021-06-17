@@ -3,6 +3,16 @@ require_once '../lib/header.php';
 
 if(isset($_GET['parent'])){
     $parent = $_GET['parent'];
+    $check_thread = "SELECT * FROM board WHERE group_num='$parent'";
+    $result = mysqli_query($conn,$check_thread);
+    $data = mysqli_num_rows($result);
+   
+    if($data == 100){
+        echo'<h1>답글 최대 갯수를 초과하여 답글을 작성할 수 없습니다.</h1>';
+        $submit_btn = '';
+    } else{
+        $submit_btn = '<button type="submit" onclick="return submitForm()">작성하기</button>';
+    }
 } else{
     $parent = 0;
 }
@@ -33,7 +43,7 @@ if(isset($_GET['parent'])){
         </div>
         <input type="hidden" class="form-control" name="user_id" value="<?php echo $_SESSION['id'];?>">
         <input type="hidden" class="form-control" name="parent" value="<?php echo $parent;?>">
-        <button type="submit" onclick="return submitForm()">작성하기</button>
+        <?php echo $submit_btn;?>
     </form>
     <a href="../index.php">돌아가기</a>
 </div>

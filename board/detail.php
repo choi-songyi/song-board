@@ -19,7 +19,7 @@ $result = mysqli_query($conn,$detail_query);
 $data = mysqli_fetch_array($result);
 $views = $data['views'];
 
-$comment_query = "SELECT * FROM comments WHERE content_number=$idx ORDER BY idx DESC";
+$comment_query = "SELECT * FROM comments WHERE content_number=$idx ORDER BY group_num,thread DESC";
 $comment_result = mysqli_query($conn,$comment_query);
 
 if(isset($_GET['idx'])){
@@ -37,62 +37,93 @@ if(isset($_GET['idx'])){
         $update_comment = '';
         $delete_comment = '';
         if($comment_id === $_SESSION['id']){
-            $delete_comment = '<form action="../prc/delete_comment_prc.php" method="POST">
+            $delete_comment = '<form action="../prc/delete_comment_prc.php" class="form" method="POST">
             <input type="hidden" name="content_number" value="'.$idx.'">
             <input type="hidden" name="idx" value="'.$comment_data['idx'].'">
             <button type="submit" class="" onclick="return submitForm()">삭제하기</button>
             </form>';
-            $update_comment = '<form action="../prc/update_comment_prc.php" name="update_comment_form" method="PUT">
+            $update_comment = '<form action="../prc/update_comment_prc.php" name="update_comment_form" class="form" method="PUT">
             <input type="hidden" id="comment'.$comment_data['idx'].'" name="comment" value="">
             <input type="hidden" name="idx" value="'.$comment_data['idx'].'">
             <input type="hidden" name="content_number" value="'.$idx.'">
             <button type="submit" class="" onclick="return updateComment('.$comment_data['idx'].')">수정하기</button>
             </form>';
         };
+        
+        if($_SESSION['isLogin']=='true'){
+            $comment_btn ='<form action="../prc/create_comment_prc.php" method="POST" name="comment_form">
+            <div class="form-group">
+                <h5>댓글</h5>
+                <textarea style="height:20px"class="form-control" name="comment"  placeholder="댓글을 입력해주세요"></textarea>
+            </div>
+            <input type="hidden" class="form-control" name="content_number" value="'.$idx.'">
+            <button type="submit" onclick="return submitComment()">댓글달기</button>
+            </form>';
+            $reply_post = '<form action="create.php" method="GET">
+            <button type="submit" name="parent" value="'.$idx.'">답글달기</button></form>';
+            $reply_comment = '<form action="../prc/create_comment_prc.php" class="form" name="" method="POST">
+            <input type="hidden" id="re_comment'.$comment_data['idx'].'" name="comment" value="">
+            <input type="hidden" name="parent" value="'.$comment_data['idx'].'">
+            <input type="hidden" name="content_number" value="'.$idx.'">
+            <button type="submit" class="" onclick="return replyComment('.$comment_data['idx'].')">댓글달기</button>
+            </form>';
+        } else {
+            $comment_btn ='<form action="" method="POST" name="comment_form">
+            <div class="form-group">
+                <h5>댓글</h5>
+                <textarea style="height:20px"class="form-control" name="comment"  placeholder="로그인 후 이용해주세요"></textarea>
+            </div>
+            <button type="" onclick="alert(\'로그인 후 이용해주세요\')">댓글달기</button>
+            </form>';
+            $reply_comment = '';
+            $login = '<a href="../member/login.php">로그인</a>';
+        };
+
         $comment_id = $comment_data['user_id'];
         $comment = $comment_data['comment'];
         $comment_time = $comment_data['time'];
         $comment_container = $comment_container.'<div class="container3">
         <p>'.$comment_id.'</p>
         <p>'.$comment.'</p>
-        <p>'.$comment_time.'</p>
-        '.$update_comment.$delete_comment.'</div>';
+        <p>'.$comment_time.$reply_comment.'</p>
+        '.$update_comment.$delete_comment.'
+        </div>';
+        };
+        
+        if($_SESSION['isLogin']=='true'){
+            $comment_btn ='<form action="../prc/create_comment_prc.php" method="POST" name="comment_form">
+            <div class="form-group">
+                <h5>댓글</h5>
+                <textarea style="height:20px"class="form-control" name="comment"  placeholder="댓글을 입력해주세요"></textarea>
+            </div>
+            <input type="hidden" class="form-control" name="content_number" value="'.$idx.'">
+            <button type="submit" onclick="return submitComment()">댓글달기</button>
+            </form>';
+            $reply_post = '<form action="create.php" method="GET">
+            <button type="submit" name="parent" value="'.$idx.'">답글달기</button></form>';
+        } else {
+            $comment_btn ='<form action="" method="POST" name="comment_form">
+            <div class="form-group">
+                <h5>댓글</h5>
+                <textarea style="height:20px"class="form-control" name="comment"  placeholder="로그인 후 이용해주세요"></textarea>
+            </div>
+            <button type="" onclick="alert(\'로그인 후 이용해주세요\')">댓글달기</button>
+            </form>';
+            $login = '<a href="../member/login.php">로그인</a>';
         };
 
-    if($_SESSION['isLogin']=='true'){
-        $comment_btn ='<form action="../prc/create_comment_prc.php" method="POST" name="comment_form">
-        <div class="form-group">
-            <h5>댓글</h5>
-            <textarea style="height:20px"class="form-control" name="comment"  placeholder="댓글을 입력해주세요"></textarea>
-        </div>
-        <input type="hidden" class="form-control" name="content_number" value="'.$idx.'">
-        <button type="submit" onclick="return submitComment()">댓글달기</button>
-        </form>';
-        $reply_post = '<form action="create.php" method="GET">
-                <button type="submit" name="parent" value="'.$idx.'">답글달기</button></form>';
-    } else {
-        $comment_btn ='<form action="" method="POST" name="comment_form">
-        <div class="form-group">
-            <h5>댓글</h5>
-            <textarea style="height:20px"class="form-control" name="comment"  placeholder="로그인 후 이용해주세요"></textarea>
-        </div>
-        <button type="" onclick="alert(\'로그인 후 이용해주세요\')">댓글달기</button>
-        </form>';
-        $login = '<a href="../member/login.php">로그인</a>';
-    };
-
-    if($name === $_SESSION['id']){
-        $delete_btn = '<form action="../prc/delete_prc.php" method="POST">
-        <input type="hidden" name="idx" value="'.$idx.'">
-        <button type="submit" class="custom" onclick="return submitForm()">삭제하기</button>
-        </form>';
-        $update_btn = '<form action="../board/update.php" method="POST">
-        <input type="hidden" name="idx" value="'.$idx.'">
-        <input type="hidden" name="title" value="'.$title.'">
-        <input type="hidden" name="contents" value="'.$contents.'">
-        <button type="submit" class="custom">수정하기</button>
-        </form>';
-    } else {$delete_btn = '';};   
+        if($name === $_SESSION['id']){
+            $delete_btn = '<form action="../prc/delete_prc.php" method="POST">
+            <input type="hidden" name="idx" value="'.$idx.'">
+            <button type="submit" class="custom" onclick="return submitForm()">삭제하기</button>
+            </form>';
+            $update_btn = '<form action="../board/update.php" method="POST">
+            <input type="hidden" name="idx" value="'.$idx.'">
+            <input type="hidden" name="title" value="'.$title.'">
+            <input type="hidden" name="contents" value="'.$contents.'">
+            <button type="submit" class="custom">수정하기</button>
+            </form>';
+        } else {$delete_btn = '';};   
     
 };
 ?>
@@ -123,6 +154,16 @@ function updateComment(a){
     }else{
     // document.update_comment_form.comment.value = comment;
     document.getElementById(`comment${a}`).value = comment;
+    };
+};
+
+function replyComment(a){
+    var comment = prompt('댓글을 입력하세요');
+    if(!comment){
+        return false;
+    }else{
+    // document.update_comment_form.comment.value = comment;
+    document.getElementById(`re_comment${a}`).value = comment;
     };
 };
 </script>
