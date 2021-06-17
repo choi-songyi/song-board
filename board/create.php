@@ -15,6 +15,7 @@ if(isset($_GET['parent'])){
     }
 } else{
     $parent = 0;
+    $submit_btn = '<button type="submit" onclick="return submitForm()">작성하기</button>';
 }
 ?>
 <script>

@@ -1,8 +1,28 @@
 
 <?php include './lib/lib.php';
 
-$board_query = "SELECT * FROM board ORDER BY group_num DESC, group_order ASC";
+if($_GET['page']){
+    $page = $_GET['page'];
+} else{
+    $page = 1;
+};
+
+// 한 페이지 내 글 개수
+$page_num = 10; 
+
+// 전체 글 개수
+$count_result = mysqli_query($conn,"SELECT * FROM board");
+$count = mysqli_num_rows($count_result);
+
+// 데이터 불러오는 시작점
+$start = ($page-1)*$page_num;
+
+// 시작점부터 한페이지 내 글 개수 만큼 데이터 불러옴
+$board_query = "SELECT * FROM board ORDER BY group_num DESC, group_order ASC LIMIT $start,$page_num";
 $result = mysqli_query($conn,$board_query);
+
+// 페이지 개수
+$pages = ceil($count/$page_num);
 
 $list = '';
 $logout_btn = '';
@@ -98,6 +118,13 @@ if($_SESSION['isLogin']==='true'){
        <?= $list;?>
     </tbody>
     </table>
+</div>
+<div>
+    <?php
+    for($i=0; $i<$pages; $i++){
+        echo '<a href='.$_SERVER['PHP_SELF'].'?page='.($i+1).'>'.($i+1).'</a>';
+    };
+    ?>
 </div>
 <div class="search_box">
     <form action="./board/search.php" method="get">
