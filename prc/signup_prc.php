@@ -7,6 +7,7 @@ if(!isset($id)){
     echo '잘못된 접근입니다';
 }
 
+// 최초 회원가입시 active=0으로 로그인 제한해두고 이메일 인증 유도(현재는 해제해둠)
 $signup_query = "UPDATE member SET active = '1' WHERE user_id = '$id'";
 $result = mysqli_query($conn,$signup_query);
 

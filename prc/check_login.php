@@ -1,6 +1,7 @@
 <?php
 include '../lib/lib.php';
 
+// 로그인 성공하면 인덱스로 이동
 if($_SESSION['isLogin']==='true'){
     header('location:../index.php');
    

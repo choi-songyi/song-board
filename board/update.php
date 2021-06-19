@@ -1,6 +1,7 @@
 <?php include '../lib/lib.php';
 require_once '../lib/header.php';
 
+// 해당 인덱스 가진 행 내용 불러와서 제목이랑 글 내용 미리 출력
 $idx = $_POST['idx'];
 $update_query = "SELECT * FROM board WHERE idx=$idx";
 $result = mysqli_query($conn,$update_query);
@@ -10,6 +11,8 @@ if($data = mysqli_fetch_array($result)){
     $contents = $data['contents'];
 }
 ?>
+
+<!-- 빈칸으로 제출시 알림 -->
 <script>
   function submitForm(){
  if(!document.update_form.title.value){

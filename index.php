@@ -75,10 +75,8 @@ if($_SESSION['isLogin']==='true'){
 </form>';
 } else if($isLogin = 'false'){
     $greeting = '로그인 후 이용해주세요';
-    $login_btn = '<form action="./member/login.php" method="POST">
-    <button type="submit" class="custom">로그인</button>
-</form>';
-}
+    $login_btn = '<a href="./member/login.php">로그인</a>';
+};
 ?>
 
 <!DOCTYPE html>

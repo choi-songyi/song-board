@@ -6,6 +6,7 @@ $contents = mysqli_real_escape_string($conn,nl2br($_POST['contents']));
 $id = $_SESSION['id'];
 $parent = $_POST['parent'];
 
+// 넘어온 부모 숫자가 0이 아니라면 답글 -> 스레드 -1, 뎁스 +1
 if(!$parent==0){
     $query = "SELECT * FROM board WHERE idx ='$parent'";
     $result = mysqli_query($conn,$query);

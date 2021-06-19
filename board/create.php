@@ -1,6 +1,7 @@
 <?php include '../lib/lib.php';
 require_once '../lib/header.php';
 
+// 부모 인덱스 있으면 스레드 확인, 없으면 0으로 넘김
 if(isset($_GET['parent'])){
     $parent = $_GET['parent'];
     $check_thread = "SELECT * FROM board WHERE group_num='$parent'";
@@ -18,6 +19,8 @@ if(isset($_GET['parent'])){
     $submit_btn = '<button type="submit" onclick="return submitForm()">작성하기</button>';
 }
 ?>
+
+<!-- 빈칸으로 제출시 alert -->
 <script>
   function submitForm(){
  if(!document.create_form.title.value){

@@ -5,11 +5,14 @@ require_once '../lib/header.php';
 $id = mysqli_real_escape_string($conn,$_POST['user_id']);
 $email = mysqli_real_escape_string($conn,$_POST['email']);
 
+
+// 입력한 아이디랑 비밀번호를 기존 정보와 비교
 $find_query = "SELECT * FROM member WHERE user_id = '$id' AND email = '$email'";
 $result = mysqli_query($conn,$find_query);
 $data = mysqli_fetch_array($result);
 $id = $data['user_id'];
 
+// 데이터 있으면 비밀번호 변경 진행 
 if($data){
     echo '<div class="login-form">
     <form action="reset_password_prc2.php" method="POST">

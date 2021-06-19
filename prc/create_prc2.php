@@ -6,6 +6,7 @@ $result = mysqli_query($conn,$query);
 $data=mysqli_fetch_array($result);
 $group_num = $data['idx'];
 
+// 넘어온 그룹넘버가 0이라면 자기 자신으로 그룹넘버 저장
 if($data['group_num']==0){
     $update_query = "UPDATE board SET group_num = '$group_num' WHERE idx='$group_num'";
     $update_result = mysqli_query($conn,$update_query);

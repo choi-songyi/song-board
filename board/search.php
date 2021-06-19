@@ -13,7 +13,8 @@ $list = '';
 $logout_btn = '';
 $login_btn = '';
 $write_btn = '';
-$i = 1;
+
+// 검색시에는 글 원래 인덱스 출력
 while($data = mysqli_fetch_array($result)){
     $idx = $data['idx'];
     $title = $data['title'];
@@ -21,7 +22,7 @@ while($data = mysqli_fetch_array($result)){
     $time = $data['time'];
     
     $list = $list.'<tr>
-    <th scope="row">'.$i.'</th>
+    <th scope="row">'.$idx.'</th>
     <td><a href="../board/detail.php?idx='.$idx.'">'.$title.'</a></td>
     <td>'.$name.'</td>
     <td>'.$time.'</td>
@@ -29,9 +30,9 @@ while($data = mysqli_fetch_array($result)){
     <td>@mdo</td>
     </tr>';
 
-    $i = $i++;
 }
 
+// 로그인 되어있으면 로그아웃, 글쓰기 버튼 표시
 if($_SESSION['isLogin']==='true'){
     $logout_btn = '<form action="../prc/logout_prc.php" method="POST">
     <button type="submit" class="custom">로그아웃</button>
@@ -40,9 +41,7 @@ if($_SESSION['isLogin']==='true'){
     <button type="submit" class="custom">글쓰기</button>
 </form>';
 } else if($isLogin = 'false'){
-    $login_btn = '<form action="../member/login.php" method="POST">
-    <button type="submit" class="custom">로그인</button>
-</form>';
+    $login_btn = '<a href = "../member/login.php">로그인</a>';
 }
 ?>
 
