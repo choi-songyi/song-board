@@ -18,6 +18,7 @@ $count = mysqli_num_rows($count_result);
 $start = ($page-1)*$page_num;
 
 // 시작점부터 한페이지 내 글 개수 만큼 데이터 불러옴
+// 글은 최신글이 위로, 답글은 최신글이 아래로
 $board_query = "SELECT * FROM board ORDER BY group_num DESC, group_order ASC LIMIT $start,$page_num";
 $result = mysqli_query($conn,$board_query);
 
